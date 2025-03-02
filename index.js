@@ -1,5 +1,5 @@
 // CREATES ALL THE DOM ELEMENTS
-const numbersInKeybord = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const numbersInKeybord = [1, 2, 3, 4, 5, 6, 7, 8, 9, ".", 0];
 
 numbersInKeybord.forEach((number) => {
   const numberButton = document.createElement("button");
@@ -8,7 +8,7 @@ numbersInKeybord.forEach((number) => {
   document.querySelector(".number-buttons").appendChild(numberButton);
 });
 
-const operatorsInKeybord = ["+", "-", "*", "/"];
+const operatorsInKeybord = ["+", "-", "x", "÷"];
 
 operatorsInKeybord.forEach((operator) => {
   const operatorButton = document.createElement("button");
@@ -17,7 +17,7 @@ operatorsInKeybord.forEach((operator) => {
   document.querySelector(".operator-buttons").appendChild(operatorButton);
 });
 
-const functionsInKeyoard = ["reset", "=", "canc"];
+const functionsInKeyoard = ["canc", "reset", "="];
 
 functionsInKeyoard.forEach((fnc) => {
   const functionButton = document.createElement("button");
@@ -35,9 +35,28 @@ functionsInKeyoard.forEach((fnc) => {
   functionButton.classList.add("function");
   document.querySelector(".function-buttons").appendChild(functionButton);
 });
+
+const advancedOperatorsInKeyoard = ["%", "√", "^", "π"];
+advancedOperatorsInKeyoard.forEach((adFnc) => {
+  const advancedOperatorsButton = document.createElement("button");
+  advancedOperatorsButton.textContent = adFnc;
+  if (adFnc === "%") {
+    advancedOperatorsButton.classList.add("percent");
+  }
+  if (adFnc === "√") {
+    advancedOperatorsButton.classList.add("sqrt");
+  }
+  if (adFnc === "^") {
+    advancedOperatorsButton.classList.add("power");
+  }
+  advancedOperatorsButton.classList.add("operator");
+  document
+    .querySelector(".operator-buttons")
+    .appendChild(advancedOperatorsButton);
+});
 // CREATES ALL THE DOM ELEMENTS
 
-// PINTA EN PANTALLA LOS NUMEROS Y OPERADORES
+// ALLOWS TO PUSH BUTTONS AND SHOW THEIR FEEDBACK ON SCREEN
 const displayDiv = document.querySelector(".display");
 let firstOperator = document.querySelector("span.data1");
 let secondOperator = document.querySelector("span.data2");
@@ -61,9 +80,9 @@ document.querySelectorAll(".operator").forEach((operatorButton) => {
   operatorButton.addEventListener("click", () => addToDisplay(operatorButton));
 });
 
-// PINTA EN PANTALLA LOS NUMEROS Y OPERADORES
+// ALLOWS TO PUSH BUTTONS AND SHOW THEIR FEEDBACK ON SCREEN
 
-// CALCULA EL RESULTADO Y lo imprime en la pantalla
+// EXECUTES BASIC CALCULATIONS
 
 const calculateExpression = (
   firstOperator,
@@ -76,27 +95,36 @@ const calculateExpression = (
     return firstOperator + secondOperator;
   } else if (operationSymbol === "-") {
     return firstOperator - secondOperator;
-  } else if (operationSymbol === "*") {
+  } else if (operationSymbol === "x") {
     return firstOperator * secondOperator;
-  } else if (operationSymbol === "/") {
+  } else if (operationSymbol === "÷") {
     return firstOperator / secondOperator;
+  } else if (operationSymbol === "^") {
+    return firstOperator ** secondOperator;
+  } else if (operationSymbol === "%") {
+    return (secondOperator / 100) * firstOperator;
+  } else if (operationSymbol === "√") {
+    return Math.sqrt(secondOperator);
+  } else if (operationSymbol === "π") {
+    return Math.PI * secondOperator;
   }
 };
 
-// EVENT LINSTENER PARA LOS BOTONES DE FUNCIONALIDAD
-
+// EVENT LINSTENER FOR FUNCTIONALITY BUTTONS
+// =
 document.querySelector(".equal").addEventListener("click", () => {
   const result = calculateExpression(
     firstOperator.textContent,
     operationSymbol.textContent,
     secondOperator.textContent
   );
-  const resultDiv = document.createElement("div");
+  let resultDiv = document.createElement("div");
   resultDiv.classList.add("result");
   resultDiv.textContent = result;
   displayDiv.appendChild(resultDiv);
 });
 
+// reset
 document.querySelector(".reset").addEventListener("click", () => {
   firstOperator.textContent = "";
   secondOperator.textContent = "";
@@ -104,6 +132,14 @@ document.querySelector(".reset").addEventListener("click", () => {
   document.querySelector(".result").remove();
 });
 
-document.querySelector(".canc").addEventListener("click", () => {});
+document.querySelector(".canc").addEventListener("click", () => {
+  if (secondOperator.textContent !== "") {
+    secondOperator.textContent = secondOperator.textContent.slice(0, -1);
+  } else if (operationSymbol.textContent !== "") {
+    operationSymbol.textContent = operationSymbol.textContent.slice(0, -1);
+  } else if (firstOperator.textContent !== "") {
+    firstOperator.textContent = firstOperator.textContent.slice(0, -1);
+  }
+});
 
-// EVENT LINSTENER PARA LOS BOTONES DE FUNCIONALIDAD
+// EVENT LINSTENER FOR FUNCTIONALITY BUTTONS
