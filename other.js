@@ -36,23 +36,14 @@ functionsInKeyoard.forEach((fnc) => {
   document.querySelector(".function-buttons").appendChild(functionButton);
 });
 
-
 // CREATES ALL THE DOM ELEMENTS
 
 // ALLOWS TO PUSH BUTTONS AND SHOW THEIR FEEDBACK ON SCREEN
 const displayDiv = document.querySelector(".display");
-let firstOperator = document.querySelector("span.data1");
-let secondOperator = document.querySelector("span.data2");
-let operationSymbol = document.querySelector("span.op");
+const opString= document.querySelector('.op-string')
 const addToDisplay = (button) => {
   const buttonValue = button.textContent;
-  if (button.classList.contains("number") && operationSymbol.textContent) {
-    secondOperator.textContent += button.textContent;
-  } else if (button.classList.contains("operator")) {
-    operationSymbol.textContent += button.textContent;
-  } else if (operationSymbol.textContent === "") {
-    firstOperator.textContent += button.textContent;
-  }
+opString.textContent += buttonValue
 };
 
 document.querySelectorAll(".number").forEach((numberButton) => {
@@ -67,62 +58,64 @@ document.querySelectorAll(".operator").forEach((operatorButton) => {
 
 // EXECUTES BASIC CALCULATIONS
 
-const calculateExpression = (
-  firstOperator,
-  operationSymbol,
-  secondOperator
-) => {
-  firstOperator = Number(firstOperator);
-  secondOperator = Number(secondOperator);
-  if (operationSymbol === "+") {
-    return firstOperator + secondOperator;
-  } else if (operationSymbol === "-") {
-    return firstOperator - secondOperator;
-  } else if (operationSymbol === "x") {
-    return firstOperator * secondOperator;
-  } else if (operationSymbol === "÷") {
-    return firstOperator / secondOperator;
-  } else if (operationSymbol === "^") {
-    return firstOperator ** secondOperator;
-  } else if (operationSymbol === "%") {
-    return (secondOperator / 100) * firstOperator;
-  } else if (operationSymbol === "√") {
-    return Math.sqrt(secondOperator);
-  } else if (operationSymbol === "π") {
-    return Math.PI * secondOperator;
-  }
-};
+
+
+const evaluateString = opString =>{
+let operands = opString.textContent.split(/[+\-x÷%√^]/g).map(operand => Number(operand))
+let operators =opString.textContent.match(/[+\-x÷%√^]/g)
+return calculateExpression(operands,operators)
+}
+
+const calculateExpression = (operands,operators) => {
+    let result = operands[0]
+//     for (let i=0; i < operators.length; i++){
+//         if(['x','÷','%','^','√'].includes(operators[i])){
+//             if (operators[i]=== 'x'){
+//                 result *= operands[i+1]
+//             } else if (operators[i] === '÷'){
+//                 result /= operands[i+1]
+//         } else if (operators[i]==='%'){
+//             result = result % operands[i+1]
+//         } else if (operators[i]=== '^'){
+// result = Math.pow(result,operands[i+1])
+//         }else if (operators[i]=== '√'){
+//          result = Math.sqrt(operands [i+1])   
+//         }
+//     }
+// }
+// for (let i=0; i < operators.length; i++){
+//     if(['+','-'].includes(operators[i])){
+//        if (operators[i]=== '+'){
+//         result += operands[i+1];
+//        } else if(operators[i]==='-'){
+//         result -= operands[i+1]
+//        }
+//     }
+// }
+// return result
+// }
+
 
 // EVENT LINSTENER FOR FUNCTIONALITY BUTTONS
 // =
 document.querySelector(".equal").addEventListener("click", () => {
-  const result = calculateExpression(
-    firstOperator.textContent,
-    operationSymbol.textContent,
-    secondOperator.textContent
-  );
+  const evokeResult = evaluateString(opString)
   let resultDiv = document.createElement("div");
   resultDiv.classList.add("result");
-  resultDiv.textContent = result;
+  resultDiv.textContent =evokeResult;
   displayDiv.appendChild(resultDiv);
 });
 
 // reset
 document.querySelector(".reset").addEventListener("click", () => {
-  firstOperator.textContent = "";
-  secondOperator.textContent = "";
-  operationSymbol.textContent = "";
-  document.querySelector(".result").remove();
+ opString.textContent = '';
+ const resultDiv = document.querySelector(".result")
+ if(resultDiv){
+  resultDiv.remove();}
 });
 
 document.querySelector(".canc").addEventListener("click", () => {
-  if (secondOperator.textContent !== "") {
-    secondOperator.textContent = secondOperator.textContent.slice(0, -1);
-  } else if (operationSymbol.textContent !== "") {
-    operationSymbol.textContent = operationSymbol.textContent.slice(0, -1);
-  } else if (firstOperator.textContent !== "") {
-    firstOperator.textContent = firstOperator.textContent.slice(0, -1);
-  }
+    opString.textContent = opString.textContent.slice(0, -1);
 });
 
 // EVENT LINSTENER FOR FUNCTIONALITY BUTTONS

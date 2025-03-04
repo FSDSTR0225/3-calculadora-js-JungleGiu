@@ -1,32 +1,37 @@
 @font-face {
-  font-family: 'VT323';
+  font-family: "VT323";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/vt323/v17/pxiKyp0ihIEF2isfFJXUdVNF.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url(https://fonts.gstatic.com/s/vt323/v17/pxiKyp0ihIEF2isfFJXUdVNF.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: 'Doto';
+  font-family: "Doto";
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/doto/v1/t5tJIRMbNJ6TQG7Il_EKPqP9zTnvqqGNcuvLMt1JIphF5uWuyE-TnLx5gssJ.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url(https://fonts.gstatic.com/s/doto/v1/t5tJIRMbNJ6TQG7Il_EKPqP9zTnvqqGNcuvLMt1JIphF5uWuyE-TnLx5gssJ.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 .display {
-
   width: 300px;
   height: 50px;
   background-color: #476a44;
   border: 2px solid #000;
   color: #000;
-  font-family: 'Doto';
-font-weight: 600;
+  font-family: "Doto";
+  font-weight: 600;
   font-size: 20px;
 }
-body{
+body {
   display: flex;
   justify-content: center;
 }
@@ -35,8 +40,8 @@ body{
   flex-direction: column;
   align-items: center;
   padding: 20px 10px 15px 10px;
-background-color: #133a48;
-border-radius: 12px;;
+  background-color: #133a48;
+  border-radius: 12px;
 }
 button {
   height: 50px;
@@ -51,24 +56,18 @@ button {
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(4, 50px);
   background-color: #133a48;
-  border: #133a48  2px solid;
-  border-radius: 0px 0px 10px 10px ;
-font-family: Consolas, 'Courier New', monospace;
-  
+  border: #133a48 2px solid;
+  border-radius: 0px 0px 10px 10px;
+  font-family: Consolas, "Courier New", monospace;
 }
 .number-buttons {
   grid-column: 1 / 4;
-  justify-items: ;
 }
 .operator-buttons {
   grid-column: 4 / 6;
-
 }
 
 .function-buttons {
-grid-column: 6 /7;
-grid-row: 2 / 4;
-
-justify-items: center;
+  grid-column: 6 /7;
+  grid-row: 2 / 4;
 }
-;
