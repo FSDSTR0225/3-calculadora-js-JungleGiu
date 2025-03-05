@@ -58,8 +58,6 @@ document.querySelectorAll(".operator").forEach((operatorButton) => {
 
 // EXECUTES BASIC CALCULATIONS
 
-
-
 const evaluateString = opString =>{
 let operands = opString.textContent.split(/[+\-x÷%√^]/g).map(operand => Number(operand))
 let operators =opString.textContent.match(/[+\-x÷%√^]/g)
@@ -68,32 +66,31 @@ return calculateExpression(operands,operators)
 
 const calculateExpression = (operands,operators) => {
     let result = operands[0]
-//     for (let i=0; i < operators.length; i++){
-//         if(['x','÷','%','^','√'].includes(operators[i])){
-//             if (operators[i]=== 'x'){
-//                 result *= operands[i+1]
-//             } else if (operators[i] === '÷'){
-//                 result /= operands[i+1]
-//         } else if (operators[i]==='%'){
-//             result = result % operands[i+1]
-//         } else if (operators[i]=== '^'){
-// result = Math.pow(result,operands[i+1])
-//         }else if (operators[i]=== '√'){
-//          result = Math.sqrt(operands [i+1])   
-//         }
-//     }
-// }
-// for (let i=0; i < operators.length; i++){
-//     if(['+','-'].includes(operators[i])){
-//        if (operators[i]=== '+'){
-//         result += operands[i+1];
-//        } else if(operators[i]==='-'){
-//         result -= operands[i+1]
-//        }
-//     }
-// }
-// return result
-// }
+    for (let i=0; i < operators.length; i++){
+          if (operators[i]=== 'x'){
+              result *= operands[i+1]
+            } else if (operators[i] === '÷'){
+                 result /= operands[i+1]
+          } else if (operators[i]==='%'){
+            result = result % operands[i+1]
+       } else if (operators[i]=== '^'){
+ result = Math.pow(result,operands[i+1])
+        }else if (operators[i]=== '√'){
+         result = Math.sqrt(operands [i+1])   
+        }
+     }
+
+ for (let i=0; i < operators.length; i++){
+     if(['+','-'].includes(operators[i])){
+     if (operators[i]=== '+'){
+       result += operands[i+1];
+        } else if(operators[i]==='-'){
+       result -= operands[i+1]
+       }
+    }
+ }
+ return result
+ }
 
 
 // EVENT LINSTENER FOR FUNCTIONALITY BUTTONS

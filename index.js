@@ -1,5 +1,5 @@
 // CREATES ALL THE DOM ELEMENTS
-const numbersInKeybord = [1, 2, 3, 4, 5, 6, 7, 8, 9, ".", 0];
+const numbersInKeybord = [1, 2, 3, 4, 5, 6, 7, 8, 9, ".", 0, '00'];
 
 numbersInKeybord.forEach((number) => {
   const numberButton = document.createElement("button");
